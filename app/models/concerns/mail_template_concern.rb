@@ -13,8 +13,13 @@ module MailTemplateConcern
 
   module ClassMethods
     def default_for_procedure(procedure)
-      body = ActionController::Base.new.render_to_string(template: const_get(:TEMPLATE_NAME))
+      template_name = template_name_for_procedure(procedure)
+      body = ActionController::Base.new.render_to_string(template: template_name)
       new(subject: const_get(:DEFAULT_SUBJECT), body: body, procedure: procedure)
+    end
+
+    def template_name_for_procedure(procedure)
+      const_get(:TEMPLATE_NAME)
     end
   end
 

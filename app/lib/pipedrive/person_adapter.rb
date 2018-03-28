@@ -27,6 +27,6 @@ class Pipedrive::PersonAdapter
   def update_person_owner(person_id, owner_id)
     params = { owner_id: owner_id }
 
-    self.put_person(person_id, params.to_json)
+    self.put_person(person_id, params)
   end
 end

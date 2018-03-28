@@ -24,10 +24,8 @@ class Pipedrive::DealAdapter
   end
 
   def self.fetch_waiting_deal_ids(person_id)
-    response = self.get_deals_for_person(person_id)
-    json = JSON.parse(response.body)
-
-    json['data'].map { |datum| datum['id'] }
+    self.get_deals_for_person(person_id)
+      .map { |datum| datum['id'] }
   end
 
   def self.update_deal_owner_and_stage(deal_id, owner_id, stage_id)

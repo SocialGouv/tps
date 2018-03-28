@@ -3,10 +3,7 @@ class Pipedrive::PersonAdapter
   PIPEDRIVE_ROBOT_ID = '2748449'
 
   def fetch_people_demandes
-    response = self.get_persons_owned_by_user(PIPEDRIVE_ROBOT_ID)
-    json = JSON.parse(response.body)
-
-    json['data'].map do |datum|
+    self.get_persons_owned_by_user(PIPEDRIVE_ROBOT_ID).map do |datum|
       {
         person_id: datum['id'],
         nom: datum['name'],

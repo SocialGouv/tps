@@ -55,6 +55,7 @@ class Admin::ProceduresController < AdminController
 
   def show
     @facade = AdminProceduresShowFacades.new @procedure.decorate
+    alert_on_attestation_and_mail_template_inconsitency
   end
 
   def edit

@@ -3,6 +3,7 @@ class Admin::AttestationTemplatesController < AdminController
 
   def edit
     @attestation_template = @procedure.attestation_template || AttestationTemplate.new(procedure: @procedure)
+    alert_on_attestation_and_mail_template_inconsitency
   end
 
   def update

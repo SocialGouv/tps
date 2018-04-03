@@ -3,10 +3,14 @@ class Admin::MailTemplatesController < AdminController
 
   def index
     @mail_templates = mail_templates
+    alert_on_attestation_and_mail_template_inconsitency
   end
 
   def edit
     @mail_template = find_mail_template_by_slug(params[:id])
+    if params[:id] == 'closed_mail'
+      alert_on_attestation_and_mail_template_inconsitency
+    end
   end
 
   def update

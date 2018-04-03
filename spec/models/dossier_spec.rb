@@ -838,4 +838,22 @@ describe Dossier do
       it { is_expected.to eq(expected) }
     end
   end
+
+  describe "safe_json_latlngs" do
+    let(:dossier) { create(:dossier, json_latlngs: json_latlngs) }
+
+    subject { dossier.safe_json_latlngs }
+
+    context 'when json_latlngs are safe' do
+    let(:json_latlngs) { '[[{"lat": 2.0, "lng": 102.0}, {"lat": 3.0, "lng": 103.0}, {"lat": 2.0, "lng": 102.0}],
+      [{"lat": 2.0, "lng": 102.0}, {"lat": 3.0, "lng": 103.0}, {"lat": 2.0, "lng": 102.0}]]' }
+      it { is_expected.to eq("[[{\"lat\":2.0,\"lng\":102.0},{\"lat\":3.0,\"lng\":103.0},{\"lat\":2.0,\"lng\":102.0}],[{\"lat\":2.0,\"lng\":102.0},{\"lat\":3.0,\"lng\":103.0},{\"lat\":2.0,\"lng\":102.0}]]") }
+    end
+
+    context 'when json_latlngs are not safe' do
+      let(:json_latlngs) { "alert(\"toto\");" }
+
+      it { is_expected.to eq({}) }
+    end
+  end
 end

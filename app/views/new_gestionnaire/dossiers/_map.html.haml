@@ -15,6 +15,6 @@
 
 :javascript
   var getPositionUrl = "#{position_gestionnaire_dossier_path(dossier.procedure, dossier)}";
-  var dossierJsonLatLngs = #{dossier.json_latlngs};
+  var dossierJsonLatLngs = #{raw(dossier.safe_json_latlngs)};
   var dossierCadastres = #{dossier.cadastres.to_json};
   var dossierQuartiersPrioritaires = #{dossier.quartier_prioritaires.to_json};

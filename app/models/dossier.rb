@@ -103,6 +103,13 @@ class Dossier < ApplicationRecord
     end
   end
 
+  def safe_json_latlngs
+    JSON.parse(json_latlngs).to_json
+  rescue Exception => e
+    Raven.capture_exception(e)
+    {}
+  end
+
   def ordered_champs
     # TODO: use the line below when the procedure preview does not leak champ with dossier_id == 0
     # champs.joins(:type_de_champ).order('types_de_champ.order_place')
